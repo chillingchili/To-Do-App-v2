@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             x:Class="MauiApp1.Views.LoginPage"
+             x:DataType="vm:LoginViewModel"
+             BackgroundColor="#F5EFE6">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="28,0" Spacing="28">
+
+            <!-- Branding -->
+            <VerticalStackLayout Spacing="6" Margin="0,70,0,0">
+                <Label Text="✓" FontSize="64" HorizontalOptions="Center" TextColor="#C17F54"/>
+                <Label Text="My To Do" FontSize="34" FontAttributes="Bold"
+                       TextColor="#3D2B1F" HorizontalOptions="Center"/>
+                <Label Text="Stay organized, stay productive."
+                       FontSize="14" TextColor="#8B6354" HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <!-- Form Card -->
+            <Border BackgroundColor="White" Padding="24" Stroke="#E8D5C4" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="16"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="18">
+
+                    <!-- Email -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Email Address" FontSize="13" FontAttributes="Bold"
+                               TextColor="#3D2B1F"/>
+                        <Border BackgroundColor="#F5EFE6" Stroke="#D9C4B3" StrokeThickness="1"
+                                Padding="14,0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8"/>
+                            </Border.StrokeShape>
+                            <Entry Placeholder="you@example.com" Keyboard="EmailAddress"
+                                   Text="{Binding Email}" BackgroundColor="Transparent"
+                                   TextColor="#3D2B1F" PlaceholderColor="#C5B0A4"
+                                   MinimumHeightRequest="48"/>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- Password -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Password" FontSize="13" FontAttributes="Bold"
+                               TextColor="#3D2B1F"/>
+                        <Border BackgroundColor="#F5EFE6" Stroke="#D9C4B3" StrokeThickness="1"
+                                Padding="14,0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8"/>
+                            </Border.StrokeShape>
+                            <Entry Placeholder="Enter your password" IsPassword="True"
+                                   Text="{Binding Password}" BackgroundColor="Transparent"
+                                   TextColor="#3D2B1F" PlaceholderColor="#C5B0A4"
+                                   MinimumHeightRequest="48"/>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- Login Button -->
+                    <Button Text="Sign In"
+                            Command="{Binding LoginCommand}"
+                            BackgroundColor="#C17F54" TextColor="White"
+                            CornerRadius="10" HeightRequest="50"
+                            FontAttributes="Bold" FontSize="16"
+                            IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"/>
+
+                    <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                       IsVisible="{Binding IsBusy}"
+                                       Color="#C17F54" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Sign Up Link -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="4" Margin="0,0,0,32">
+                <Label Text="Don't have an account?" TextColor="#8B6354" FontSize="14"/>
+                <Label Text="Sign Up" TextColor="#C17F54" FontSize="14" FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToRegisterCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

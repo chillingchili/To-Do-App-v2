@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             xmlns:models="clr-namespace:MauiApp1"
+             x:Class="MauiApp1.Views.CompletedToDoPage"
+             x:DataType="vm:CompletedToDoViewModel"
+             Title="Completed Tasks"
+             BackgroundColor="#F5EFE6">
+
+    <ListView x:Name="CompletedListView"
+              ItemsSource="{Binding Items}"
+              BackgroundColor="Transparent"
+              SeparatorVisibility="None"
+              HasUnevenRows="True"
+              ItemTapped="OnItemTapped">
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="models:ToDoClass">
+                <ViewCell>
+                    <Border BackgroundColor="White"
+                            Margin="16,5"
+                            Padding="16,14"
+                            Stroke="#C8E6C9"
+                            StrokeThickness="1">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="14"/>
+                        </Border.StrokeShape>
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <!-- Green tick badge -->
+                            <Border Grid.Column="0"
+                                    BackgroundColor="#2D6A4F"
+                                    WidthRequest="32" HeightRequest="32"
+                                    VerticalOptions="Center"
+                                    Margin="0,0,12,0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="16"/>
+                                </Border.StrokeShape>
+                                <Label Text="✓" TextColor="White" FontSize="14"
+                                       HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                                <Label Text="{Binding item_name}"
+                                       FontSize="16" FontAttributes="Bold"
+                                       TextColor="#3D2B1F"
+                                       LineBreakMode="TailTruncation"/>
+                                <Label Text="{Binding item_description}"
+                                       FontSize="13" TextColor="#8B6354"
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="2"/>
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" Text="›"
+                                   FontSize="22" TextColor="#2D6A4F"
+                                   VerticalOptions="Center" Margin="8,0,0,0"/>
+                        </Grid>
+                    </Border>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</ContentPage>

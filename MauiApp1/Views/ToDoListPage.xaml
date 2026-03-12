@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             xmlns:models="clr-namespace:MauiApp1"
+             x:Class="MauiApp1.Views.ToDoListPage"
+             x:DataType="vm:ToDoListViewModel"
+             Title="My Tasks"
+             BackgroundColor="#F5EFE6">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Top Add Button -->
+        <Button Grid.Row="0"
+                Text="＋  Add New Task"
+                Command="{Binding AddItemCommand}"
+                BackgroundColor="#C17F54" TextColor="White"
+                CornerRadius="10" HeightRequest="48"
+                FontAttributes="Bold" FontSize="15"
+                Margin="16,12"/>
+
+        <!-- Task List -->
+        <ListView Grid.Row="1"
+                  x:Name="TaskListView"
+                  ItemsSource="{Binding Items}"
+                  BackgroundColor="Transparent"
+                  SeparatorVisibility="None"
+                  HasUnevenRows="True"
+                  ItemTapped="OnItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:ToDoClass">
+                    <ViewCell>
+                        <Border BackgroundColor="White"
+                                Margin="16,5"
+                                Padding="16,14"
+                                Stroke="#E8D5C4"
+                                StrokeThickness="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="14"/>
+                            </Border.StrokeShape>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                    <Label Text="{Binding item_name}"
+                                           FontSize="16" FontAttributes="Bold"
+                                           TextColor="#3D2B1F"
+                                           LineBreakMode="TailTruncation"/>
+                                    <Label Text="{Binding item_description}"
+                                           FontSize="13" TextColor="#8B6354"
+                                           LineBreakMode="TailTruncation"
+                                           MaxLines="2"/>
+                                </VerticalStackLayout>
+                                <Label Grid.Column="1" Text="›"
+                                       FontSize="22" TextColor="#C17F54"
+                                       VerticalOptions="Center" Margin="8,0,0,0"/>
+                            </Grid>
+                        </Border>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+
+</ContentPage>

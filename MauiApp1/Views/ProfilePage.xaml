@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             x:Class="MauiApp1.Views.ProfilePage"
+             x:DataType="vm:ProfileViewModel"
+             Title="My Profile"
+             BackgroundColor="#F5EFE6">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="24">
+
+            <!-- Avatar + Name Card -->
+            <Border BackgroundColor="White" Padding="24" Stroke="#E8D5C4" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="16"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="12" HorizontalOptions="Center">
+
+                    <!-- Avatar Circle -->
+                    <Border BackgroundColor="#C17F54"
+                            WidthRequest="80" HeightRequest="80"
+                            HorizontalOptions="Center">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="40"/>
+                        </Border.StrokeShape>
+                        <Label Text="👤" FontSize="36"
+                               HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Border>
+
+                    <Label Text="{Binding UserName}" FontSize="22" FontAttributes="Bold"
+                           TextColor="#3D2B1F" HorizontalOptions="Center"/>
+                    <Label Text="{Binding UserEmail}" FontSize="14"
+                           TextColor="#8B6354" HorizontalOptions="Center"/>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Info Card -->
+            <Border BackgroundColor="White" Padding="20" Stroke="#E8D5C4" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="16"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="16">
+
+                    <Label Text="Account Details" FontSize="14" FontAttributes="Bold"
+                           TextColor="#C17F54"/>
+
+                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="12">
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="Name" FontSize="13" FontAttributes="Bold"
+                               TextColor="#3D2B1F" VerticalOptions="Center"/>
+                        <Label Grid.Row="0" Grid.Column="1"
+                               Text="{Binding UserName}" FontSize="13"
+                               TextColor="#8B6354" VerticalOptions="Center"/>
+
+                        <Label Grid.Row="1" Grid.Column="0"
+                               Text="Email" FontSize="13" FontAttributes="Bold"
+                               TextColor="#3D2B1F" VerticalOptions="Center"/>
+                        <Label Grid.Row="1" Grid.Column="1"
+                               Text="{Binding UserEmail}" FontSize="13"
+                               TextColor="#8B6354" VerticalOptions="Center"/>
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Logout Button -->
+            <Button Text="Sign Out"
+                    Command="{Binding LogoutCommand}"
+                    BackgroundColor="#C0392B" TextColor="White"
+                    CornerRadius="10" HeightRequest="50"
+                    FontAttributes="Bold" FontSize="16"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

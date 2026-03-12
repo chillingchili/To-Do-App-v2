@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             x:Class="MauiApp1.Views.EditCompletedToDoPage"
+             x:DataType="vm:EditCompletedToDoViewModel"
+             Title="Completed Task"
+             BackgroundColor="#F5EFE6">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <Border BackgroundColor="White" Padding="20" Stroke="#C8E6C9" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="16"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="16">
+
+                    <!-- Status Badge -->
+                    <Border BackgroundColor="#E8F5E9" Padding="10,6" HorizontalOptions="Start">
+                        <Border.StrokeShape><RoundRectangle CornerRadius="8"/></Border.StrokeShape>
+                        <Label Text="✓  Completed" TextColor="#2D6A4F"
+                               FontSize="12" FontAttributes="Bold"/>
+                    </Border>
+
+                    <!-- Task Name -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Task Name" FontSize="13" FontAttributes="Bold" TextColor="#3D2B1F"/>
+                        <Border BackgroundColor="#F5EFE6" Stroke="#D9C4B3" StrokeThickness="1" Padding="14,0">
+                            <Border.StrokeShape><RoundRectangle CornerRadius="8"/></Border.StrokeShape>
+                            <Entry Placeholder="Task name" Keyboard="Default"
+                                   Text="{Binding Name}" BackgroundColor="Transparent"
+                                   TextColor="#3D2B1F" PlaceholderColor="#C5B0A4"
+                                   MinimumHeightRequest="48"/>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- Description -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Description" FontSize="13" FontAttributes="Bold" TextColor="#3D2B1F"/>
+                        <Border BackgroundColor="#F5EFE6" Stroke="#D9C4B3" StrokeThickness="1" Padding="14,8">
+                            <Border.StrokeShape><RoundRectangle CornerRadius="8"/></Border.StrokeShape>
+                            <Editor Placeholder="Task description..." Keyboard="Default"
+                                    Text="{Binding Description}" BackgroundColor="Transparent"
+                                    TextColor="#3D2B1F" PlaceholderColor="#C5B0A4"
+                                    AutoSize="TextChanges"
+                                    MinimumHeightRequest="100"/>
+                        </Border>
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Save Button -->
+            <Button Text="Save Changes"
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="#C17F54" TextColor="White"
+                    CornerRadius="10" HeightRequest="50"
+                    FontAttributes="Bold" FontSize="16"/>
+
+            <!-- Move to Pending Button -->
+            <Button Text="↩  Move Back to Pending"
+                    Command="{Binding MoveToPendingCommand}"
+                    BackgroundColor="#5C7A99" TextColor="White"
+                    CornerRadius="10" HeightRequest="50"
+                    FontSize="15"/>
+
+            <!-- Delete Button -->
+            <Button Text="Delete Task"
+                    Command="{Binding DeleteCommand}"
+                    BackgroundColor="#C0392B" TextColor="White"
+                    CornerRadius="10" HeightRequest="50"
+                    FontSize="15"/>
+
+            <!-- Cancel -->
+            <Button Text="Cancel"
+                    Command="{Binding CancelCommand}"
+                    BackgroundColor="Transparent" TextColor="#8B6354"
+                    BorderColor="#D9C4B3" BorderWidth="1"
+                    CornerRadius="10" HeightRequest="50"
+                    FontSize="15"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
