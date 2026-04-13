@@ -19,8 +19,8 @@
 - [TODO-05] Delete To Do Task
 
 **Plans:** 2 plans
-- [ ] 01-01-PLAN.md — Verify Auth APIs (Sign in, Sign Up)
-- [ ] 01-02-PLAN.md — Verify To Do CRUD APIs
+- [x] 01-01-PLAN.md — Verify Auth APIs (Sign in, Sign Up)
+- [x] 01-02-PLAN.md — Verify To Do CRUD APIs
 
 ---
 
