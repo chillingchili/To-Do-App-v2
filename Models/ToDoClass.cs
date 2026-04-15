@@ -1,10 +1,8 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using SQLite;
 
 namespace MauiApp1
 {
-    [Table("todo_items")]
     public class ToDoClass : INotifyPropertyChanged
     {
         public ToDoClass() { }
@@ -15,11 +13,16 @@ namespace MauiApp1
         string _status = string.Empty;
         int _user_id;
 
-        [PrimaryKey, AutoIncrement]
         public int item_id
         {
             get { return _item_id; }
             set { _item_id = value; OnPropertyChanged(nameof(item_id)); }
+        }
+
+        public int id
+        {
+            get { return _item_id; }
+            set { _item_id = value; OnPropertyChanged(nameof(id)); }
         }
 
         public string item_name

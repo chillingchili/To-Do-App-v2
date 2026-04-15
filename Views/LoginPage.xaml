@@ -34,7 +34,7 @@
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="8"/>
                             </Border.StrokeShape>
-                            <Entry Placeholder="you@example.com" Keyboard="EmailAddress"
+                            <Entry Placeholder="you@example.com" Keyboard="Default"
                                    Text="{Binding Email}" BackgroundColor="Transparent"
                                    TextColor="#3D2B1F" PlaceholderColor="#C5B0A4"
                                    MinimumHeightRequest="48"/>

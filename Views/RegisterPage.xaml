@@ -25,13 +25,25 @@
                 </Border.StrokeShape>
                 <VerticalStackLayout Spacing="16">
 
-                    <!-- Name -->
+                    <!-- First Name -->
                     <VerticalStackLayout Spacing="6">
-                        <Label Text="Full Name" FontSize="13" FontAttributes="Bold" TextColor="#3D2B1F"/>
+                        <Label Text="First Name" FontSize="13" FontAttributes="Bold" TextColor="#3D2B1F"/>
                         <Border BackgroundColor="#F5EFE6" Stroke="#D9C4B3" StrokeThickness="1" Padding="14,0">
                             <Border.StrokeShape><RoundRectangle CornerRadius="8"/></Border.StrokeShape>
-                            <Entry Placeholder="Juan dela Cruz" Keyboard="Default"
-                                   Text="{Binding Name}" BackgroundColor="Transparent"
+                            <Entry Placeholder="Juan" Keyboard="Default"
+                                   Text="{Binding FirstName}" BackgroundColor="Transparent"
+                                   TextColor="#3D2B1F" PlaceholderColor="#C5B0A4"
+                                   MinimumHeightRequest="48"/>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- Last Name -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Last Name" FontSize="13" FontAttributes="Bold" TextColor="#3D2B1F"/>
+                        <Border BackgroundColor="#F5EFE6" Stroke="#D9C4B3" StrokeThickness="1" Padding="14,0">
+                            <Border.StrokeShape><RoundRectangle CornerRadius="8"/></Border.StrokeShape>
+                            <Entry Placeholder="dela Cruz" Keyboard="Default"
+                                   Text="{Binding LastName}" BackgroundColor="Transparent"
                                    TextColor="#3D2B1F" PlaceholderColor="#C5B0A4"
                                    MinimumHeightRequest="48"/>
                         </Border>
@@ -42,7 +54,7 @@
                         <Label Text="Email Address" FontSize="13" FontAttributes="Bold" TextColor="#3D2B1F"/>
                         <Border BackgroundColor="#F5EFE6" Stroke="#D9C4B3" StrokeThickness="1" Padding="14,0">
                             <Border.StrokeShape><RoundRectangle CornerRadius="8"/></Border.StrokeShape>
-                            <Entry Placeholder="you@example.com" Keyboard="EmailAddress"
+                            <Entry Placeholder="you@example.com" Keyboard="Default"
                                    Text="{Binding Email}" BackgroundColor="Transparent"
                                    TextColor="#3D2B1F" PlaceholderColor="#C5B0A4"
                                    MinimumHeightRequest="48"/>

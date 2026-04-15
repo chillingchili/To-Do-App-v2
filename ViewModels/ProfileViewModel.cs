@@ -15,11 +15,10 @@ public partial class ProfileViewModel : BaseViewModel
 
     public void Initialize()
     {
-        var user = AuthService.Instance.CurrentUser;
-        if (user is not null)
+        if (AuthService.Instance.IsLoggedIn)
         {
-            UserName = user.name;
-            UserEmail = user.email;
+            UserName = $"{AuthService.Instance.CurrentUserFirstName} {AuthService.Instance.CurrentUserLastName}".Trim();
+            UserEmail = AuthService.Instance.CurrentUserEmail ?? "";
         }
     }
 

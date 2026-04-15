@@ -15,9 +15,8 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        // Initialize the SQLite database on startup
-        _ = AppServices.Database;
-
+        // API service initialized in AppServices
+        
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

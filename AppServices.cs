@@ -7,7 +7,7 @@ namespace MauiApp1;
 /// </summary>
 public static class AppServices
 {
-    public static DatabaseService Database { get; } = new DatabaseService();
+    public static ApiService Api { get; } = new ApiService();
 
     // Temporarily holds the item being edited so Edit pages can pick it up.
     public static ToDoClass? SelectedToDoItem { get; set; }

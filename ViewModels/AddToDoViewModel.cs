@@ -21,16 +21,26 @@ public partial class AddToDoViewModel : BaseViewModel
             return;
         }
 
-        var item = new ToDoClass
+        IsBusy = true;
+        try
         {
-            item_name = Name.Trim(),
-            item_description = Description.Trim(),
-            status = "pending",
-            user_id = AuthService.Instance.CurrentUser!.id
-        };
+            var response = await AppServices.Api.AddToDoAsync(
+                Name.Trim(),
+                Description.Trim(),
+                AuthService.Instance.CurrentUserId);
 
-        await AppServices.Database.InsertToDoAsync(item);
-        await Shell.Current.GoToAsync("..");
+            if (response?.status != 200)
+            {
+                await Shell.Current.DisplayAlert("Error", response?.message ?? "Could not add task.", "OK");
+                return;
+            }
+
+            await Shell.Current.GoToAsync("..");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 
     [RelayCommand]

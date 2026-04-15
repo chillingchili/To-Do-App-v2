@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MauiApp1.Services;
 
 namespace MauiApp1.ViewModels;
 
@@ -34,10 +35,26 @@ public partial class EditCompletedToDoViewModel : BaseViewModel
             return;
         }
 
-        _currentItem.item_name = Name.Trim();
-        _currentItem.item_description = Description.Trim();
-        await AppServices.Database.UpdateToDoAsync(_currentItem);
-        await Shell.Current.GoToAsync("..");
+        IsBusy = true;
+        try
+        {
+            var response = await AppServices.Api.UpdateToDoAsync(
+                Name.Trim(),
+                Description.Trim(),
+                _currentItem.id);
+
+            if (response?.status != 200)
+            {
+                await Shell.Current.DisplayAlert("Error", response?.message ?? "Could not update task.", "OK");
+                return;
+            }
+
+            await Shell.Current.GoToAsync("..");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 
     [RelayCommand]
@@ -45,9 +62,22 @@ public partial class EditCompletedToDoViewModel : BaseViewModel
     {
         if (_currentItem is null) return;
 
-        _currentItem.status = "pending";
-        await AppServices.Database.UpdateToDoAsync(_currentItem);
-        await Shell.Current.GoToAsync("..");
+        IsBusy = true;
+        try
+        {
+            var response = await AppServices.Api.ChangeToDoStatusAsync("active", _currentItem.id);
+            if (response?.status != 200)
+            {
+                await Shell.Current.DisplayAlert("Error", response?.message ?? "Could not change status.", "OK");
+                return;
+            }
+
+            await Shell.Current.GoToAsync("..");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 
     [RelayCommand]
@@ -59,8 +89,22 @@ public partial class EditCompletedToDoViewModel : BaseViewModel
             "Delete Task", "Are you sure you want to delete this task?", "Delete", "Cancel");
         if (!confirmed) return;
 
-        await AppServices.Database.DeleteToDoAsync(_currentItem);
-        await Shell.Current.GoToAsync("..");
+        IsBusy = true;
+        try
+        {
+            var response = await AppServices.Api.DeleteToDoAsync(_currentItem.id);
+            if (response?.status != 200)
+            {
+                await Shell.Current.DisplayAlert("Error", response?.message ?? "Could not delete task.", "OK");
+                return;
+            }
+
+            await Shell.Current.GoToAsync("..");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 
     [RelayCommand]

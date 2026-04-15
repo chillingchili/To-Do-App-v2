@@ -13,33 +13,13 @@
     <TabBar>
 
         <Tab Title="To Do">
-            <Tab.Icon>
-                <FontImageSource Glyph="&#x2611;"
-                                 Color="#C17F54"
-                                 Size="22"/>
-            </Tab.Icon>
-            <ShellContent Route="ToDoListPage"
-                          ContentTemplate="{DataTemplate views:ToDoListPage}"/>
+            <ShellContent Route="ToDoListPage" ContentTemplate="{DataTemplate views:ToDoListPage}"/>
         </Tab>
-
         <Tab Title="Completed">
-            <Tab.Icon>
-                <FontImageSource Glyph="&#x2713;"
-                                 Color="#C17F54"
-                                 Size="22"/>
-            </Tab.Icon>
-            <ShellContent Route="CompletedToDoPage"
-                          ContentTemplate="{DataTemplate views:CompletedToDoPage}"/>
+            <ShellContent Route="CompletedToDoPage" ContentTemplate="{DataTemplate views:CompletedToDoPage}"/>
         </Tab>
-
         <Tab Title="Profile">
-            <Tab.Icon>
-                <FontImageSource Glyph="&#x1F464;"
-                                 Color="#C17F54"
-                                 Size="22"/>
-            </Tab.Icon>
-            <ShellContent Route="ProfilePage"
-                          ContentTemplate="{DataTemplate views:ProfilePage}"/>
+            <ShellContent Route="ProfilePage" ContentTemplate="{DataTemplate views:ProfilePage}"/>
         </Tab>
 
     </TabBar>

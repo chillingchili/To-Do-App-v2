@@ -1,13 +1,16 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MauiApp1.Models;
+using MauiApp1.Services;
 
 namespace MauiApp1.ViewModels;
 
 public partial class RegisterViewModel : BaseViewModel
 {
     [ObservableProperty]
-    private string name = string.Empty;
+    private string firstName = string.Empty;
+
+    [ObservableProperty]
+    private string lastName = string.Empty;
 
     [ObservableProperty]
     private string email = string.Empty;
@@ -21,7 +24,8 @@ public partial class RegisterViewModel : BaseViewModel
     [RelayCommand]
     private async Task RegisterAsync()
     {
-        if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Email) ||
+        if (string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName) ||
+            string.IsNullOrWhiteSpace(Email) ||
             string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(ConfirmPassword))
         {
             await ShowAlert("Missing Information", "Please fill in all fields.");
@@ -43,23 +47,29 @@ public partial class RegisterViewModel : BaseViewModel
         IsBusy = true;
         try
         {
-            var existing = await AppServices.Database.GetUserAsync(Email.Trim().ToLower());
-            if (existing is not null)
+            System.Diagnostics.Debug.WriteLine($"Attempting registration: {FirstName} {LastName} ({Email})");
+            
+            var response = await AppServices.Api.SignUpAsync(FirstName.Trim(), LastName.Trim(), Email.Trim(), Password);
+            
+            if (response?.status != 200)
             {
-                await ShowAlert("Email Taken", "An account with this email already exists.");
+                MainThread.BeginInvokeOnMainThread(async () => {
+                    await ShowAlert("Registration Failed", response?.message ?? "Could not create account.");
+                });
                 return;
             }
 
-            var user = new UserClass
-            {
-                name = Name.Trim(),
-                email = Email.Trim().ToLower(),
-                password_hash = HashHelper.Hash(Password)
-            };
-
-            await AppServices.Database.CreateUserAsync(user);
-            await ShowAlert("Account Created", "Your account has been created! Please sign in.");
-            await Application.Current!.Windows[0].Page!.Navigation.PopAsync();
+            MainThread.BeginInvokeOnMainThread(async () => {
+                await ShowAlert("Account Created", "Your account has been created! Please sign in.");
+                await Application.Current!.Windows[0].Page!.Navigation.PopAsync();
+            });
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"REGISTRATION VIEWMODEL ERROR: {ex}");
+            MainThread.BeginInvokeOnMainThread(async () => {
+                await ShowAlert("Error", ex.Message);
+            });
         }
         finally
         {
